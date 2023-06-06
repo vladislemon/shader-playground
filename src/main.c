@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include <glad/gl.h>
 #include <GLFW/glfw3.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -210,6 +210,9 @@ void render() {
 
 int main() {
     glfwInit();
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     WINDOW = glfwCreateWindow(WIDTH, HEIGHT, TITLE, NULL, NULL);
     glfwGetWindowPos(WINDOW, &POS_X, &POS_Y);
     glfwSetKeyCallback(WINDOW, onKeyEvent);
@@ -218,7 +221,7 @@ int main() {
     glfwSetFramebufferSizeCallback(WINDOW, onFramebufferSizeEvent);
     glfwSetWindowPosCallback(WINDOW, onWindowPosEvent);
     glfwMakeContextCurrent(WINDOW);
-    glewInit();
+    gladLoadGL(glfwGetProcAddress);
     glfwSwapInterval(1);
 
     setupVAO();
